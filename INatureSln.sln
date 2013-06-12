@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INature", "INature\INature.csproj", "{7AF0BEF2-C848-4A09-89C8-FCCF5C7DF531}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISlide", "ISlide\ISlide.csproj", "{07B01801-5F2E-493F-B804-7833F6B6645A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISlide", "ISlide\ISlide.csproj", "{454C02D8-6EE5-410D-9BD6-98B3E5ED4B53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,10 @@ Global
 		{7AF0BEF2-C848-4A09-89C8-FCCF5C7DF531}.Debug|x86.Build.0 = Debug|x86
 		{7AF0BEF2-C848-4A09-89C8-FCCF5C7DF531}.Release|x86.ActiveCfg = Release|x86
 		{7AF0BEF2-C848-4A09-89C8-FCCF5C7DF531}.Release|x86.Build.0 = Release|x86
-		{07B01801-5F2E-493F-B804-7833F6B6645A}.Debug|x86.ActiveCfg = Debug|x86
-		{07B01801-5F2E-493F-B804-7833F6B6645A}.Debug|x86.Build.0 = Debug|x86
-		{07B01801-5F2E-493F-B804-7833F6B6645A}.Release|x86.ActiveCfg = Release|x86
-		{07B01801-5F2E-493F-B804-7833F6B6645A}.Release|x86.Build.0 = Release|x86
+		{454C02D8-6EE5-410D-9BD6-98B3E5ED4B53}.Debug|x86.ActiveCfg = Debug|x86
+		{454C02D8-6EE5-410D-9BD6-98B3E5ED4B53}.Debug|x86.Build.0 = Debug|x86
+		{454C02D8-6EE5-410D-9BD6-98B3E5ED4B53}.Release|x86.ActiveCfg = Release|x86
+		{454C02D8-6EE5-410D-9BD6-98B3E5ED4B53}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

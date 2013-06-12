@@ -1,8 +1,17 @@
 ﻿<Window x:Class="ISlide.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="ISlide" Name="win_ges" WindowStartupLocation="CenterScreen" Closing="win_ges_Closing" Width="685" Height="305" Loaded="win_ges_Loaded" xmlns:my="clr-namespace:Microsoft.Samples.Kinect.WpfViewers;assembly=Microsoft.Samples.Kinect.WpfViewers" PreviewKeyDown="win_ges_PreviewKeyDown" ResizeMode="CanMinimize">
+    <Grid Name="grid_main" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}">
+        <Image HorizontalAlignment="Left" Name="img_color" Stretch="Fill" VerticalAlignment="Top" Width="320" Height="240" Margin="12,10,0,0" Source="/ISlide;component/Images/error.jpg" />
+        <Button Content="启动" Margin="571,130,12,0" Name="btn_start" Click="btn_start_Click" Height="94" VerticalAlignment="Top"/>
+        <Button Content="打开..." Name="btn_open" Margin="571,40,0,0" Click="btn_open_Click" Height="23" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75"  />        
+        <Button Content="调整" Height="23" HorizontalAlignment="Left" Margin="454,154,0,0" Name="btn_set" VerticalAlignment="Top" Width="75" Click="btn_set_Click" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="409,40,0,0" Name="txt_filename" VerticalAlignment="Top" Width="154" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="345,42,0,0" Name="textBlock1" Text="文件位置" VerticalAlignment="Top" />        
+        <Slider FlowDirection="LeftToRight" Height="170" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="409,80,0,0" Maximum="27" Minimum="-27" Name="slider_angle" Orientation="Vertical" SelectionEnd="0" SmallChange="1" VerticalAlignment="Top" VerticalContentAlignment="Top" Width="25" ValueChanged="slider_angle_ValueChanged" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="367,156,0,0" Name="textBlock_angle" Text="0" VerticalAlignment="Top" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="345,92,0,0" Name="textBlock2" Text="调整视角" VerticalAlignment="Top" />
+        <CheckBox Content="坐姿模式" Height="16" HorizontalAlignment="Left" Margin="571,92,0,0" Name="checkBox_seated" VerticalAlignment="Top" />
     </Grid>
 </Window>
