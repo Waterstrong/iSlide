@@ -20,6 +20,8 @@ using System.Windows.Media.Animation;
 using Microsoft.Kinect;
 using Microsoft.Samples.Kinect.SwipeGestureRecognizer;
 using System.Configuration;
+using NUI.Data;
+using NUI.Motion;
 
 namespace ISlide
 {
@@ -59,6 +61,9 @@ namespace ISlide
         private Process pro = null;
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private MotionSuper _motion = null; // 动作识别入口
+        private FeatureData _featureData = new FeatureData();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -67,6 +72,16 @@ namespace ISlide
 
         private void win_ges_Loaded(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                // 创建处理链
+                _motion = MotionFactory.CreateHandleChain();
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Application.Current.Shutdown();
+            }
             KinectStart();
             StartColorFrame();
             this.txt_filename.Text = ConfigurationSettings.AppSettings["FileName"];
@@ -239,6 +254,86 @@ namespace ISlide
             }            
         }
 
+        private bool isHandDown = false;
+        private bool isHandMiddle = false;
+
+        private void RecognizeMotion(Skeleton[] skeletons)
+        {
+            Point pt = new Point(0, 0);
+            foreach (Skeleton skeleton in skeletons)
+            {
+                // 动作进行识别
+                _featureData.SetRelativeJoints(skeleton);
+                int rec = _motion.HandleDataEx(_featureData);
+                switch (rec)
+                {
+                    case -1:
+                        break; //未识别直接返回
+                    case 34: // 左手向上
+                        pt.X = SystemParameters.PrimaryScreenWidth / 2;
+                        pt.Y = SystemParameters.PrimaryScreenHeight / 2;
+                        Mouse.MoveTo(pt);
+                        Mouse.Click(MouseButton.Left);
+                        break;
+                    //case 35: // 右手向上
+                    //    break; 
+                    case 36: // 左手向下
+                        break;
+                    case 37: // 右手向下
+                        isHandDown = true;
+                        Keyboard.Press(Key.Tab);
+                        Keyboard.Release(Key.Tab);
+                        HighlightSkeleton(skeleton);
+                        break;
+                    case 21: // 水平展开
+                        if (isHandDown == false)
+                        {
+                            break;
+                        }
+                        isHandMiddle = true;
+                        Keyboard.Press(Key.Enter);
+                        Keyboard.Release(Key.Enter);
+
+                        Keyboard.Press(Key.Left);
+                        Keyboard.Release(Key.Left);
+
+                        Keyboard.Press(Key.Enter);
+                        Keyboard.Release(Key.Enter);
+
+                        HighlightSkeleton(skeleton);
+
+                        Thread.Sleep(1000);
+
+                        pt.X = SystemParameters.PrimaryScreenWidth / 2;
+                        pt.Y = SystemParameters.PrimaryScreenHeight / 2;
+                        Mouse.MoveTo(pt);
+                        Mouse.DoubleClick(MouseButton.Left);
+                        break;
+                    case 35: // 水平收缩
+                        if (isHandMiddle == false)
+                        {
+                            break;
+                        }
+                        Keyboard.Press(Key.Escape);
+                        Keyboard.Release(Key.Escape);
+                        
+                        Thread.Sleep(500);
+                        Keyboard.Press(Key.LeftAlt);
+                        Keyboard.Press(Key.F4);
+                        Keyboard.Release(Key.LeftAlt);
+                        Keyboard.Release(Key.F4);
+
+                        HighlightSkeleton(skeleton);
+                        isHandDown = false;
+                        isHandMiddle = false;
+
+                        break;
+                   
+                    default:
+                        break;
+                }
+            }
+        }
         private void OnSkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
         {
             if (pro == null || pro.HasExited)
@@ -277,7 +372,12 @@ namespace ISlide
                     {
                         this.nearestId = newNearestId;
                     }
+                   
+
                     this.activeRecognizer.Recognize(sender, frame, this.skeletons);
+
+                    RecognizeMotion(this.skeletons);
+
                     this.DrawStickMen(this.skeletons);
                 }
             }

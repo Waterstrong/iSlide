@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{454C02D8-6EE5-410D-9BD6-98B3E5ED4B53}</ProjectGuid>
+    <ProjectGuid>{6316437C-9A46-4A7E-BF50-C795A917CC98}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ISlide</RootNamespace>
-    <AssemblyName>ISlide</AssemblyName>
+    <RootNamespace>IPassServer</RootNamespace>
+    <AssemblyName>IPassServer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -36,28 +36,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Coding4Fun.Kinect.Wpf">
-      <HintPath>D:\Program Files\Coding4Fun.Kinect.Toolkit\Coding4Fun.Kinect.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Kinect, Version=1.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Samples.Kinect.SwipeGestureRecognizer">
-      <HintPath>.\Microsoft.Samples.Kinect.SwipeGestureRecognizer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Samples.Kinect.WpfViewers, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\Microsoft.Samples.Kinect.WpfViewers.dll</HintPath>
-    </Reference>
-    <Reference Include="NUI.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\NUI.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="NUI.Motion, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\NUI.Motion.dll</HintPath>
-    </Reference>
-    <Reference Include="SkeletalTracking">
-      <HintPath>..\..\#Demo of Kinect\KinectforWindowsSDKV1\5.Skeletal Tracking\SkeletalTracking\SkeletalTracking\bin\Debug\SkeletalTracking.exe</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -77,11 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Gesture.cs" />
-    <Compile Include="Simulation.cs" />
-    <Compile Include="StickMen.xaml.cs">
-      <DependentUpon>StickMen.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="RemoteClient.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -94,10 +68,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="StickMen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -117,7 +87,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -125,10 +94,14 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\error.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\error.jpg" />
+    <ProjectReference Include="..\NUI.Common\NUI.Common.csproj">
+      <Project>{6ABAC657-7C7D-4341-B606-450FC4C7ED6E}</Project>
+      <Name>NUI.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NUI.Data\NUI.Data.csproj">
+      <Project>{66E4B731-F0A8-42DA-885E-3D10E3875E49}</Project>
+      <Name>NUI.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
