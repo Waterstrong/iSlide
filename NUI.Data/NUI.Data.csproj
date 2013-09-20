@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="DepthData.cs" />
     <Compile Include="ColorData.cs" />
-    <Compile Include="Packet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SkeletonData.cs" />
   </ItemGroup>
